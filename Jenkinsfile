@@ -1,6 +1,6 @@
 pipeline {
 	parameters {
-		string defaultValue: 'https://github.com/devlinmr/cdap-build.git', description: 'cdap-build repo to build from.', name: 'GIT_REPO', trim: false
+		string defaultValue: 't', description: 'cdap-build repo to build from.', name: 'GIT_REPO', trim: false
 		string defaultValue: 'devlinm@gmail.com', description: 'Git repo credentials.', name: 'GIT_REPO_CREDENTIALS'
 		string defaultValue: '', description: 'Git commit to build from.', name: 'GIT_COMMIT', trim: false
 		string defaultValue: 'feature/add-build-ci', description: 'Git branch to build from.', name: 'GIT_BRANCH', trim: false
@@ -11,8 +11,7 @@ pipeline {
 	stages {
 		stage("Checkout Source") {
 			steps {
-				git changelog: false, credentialsId: env.GIT_REPO_CREDENTIALS, poll: false, url: env.GIT_REPO
-				sh "git checkout '${GIT_BRANCH}'"
+				git changelog: false, credentialsId: env.GIT_REPO_CREDENTIALS, poll: false, url: env.GIT_REPO, branch: env.GIT_BRANCH
 				sh "git checkout -f '${GIT_COMMIT}'"
 			}
 		}
