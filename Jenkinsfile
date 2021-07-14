@@ -9,12 +9,6 @@ pipeline {
 	}
 	agent any
 	stages {
-		stage("Checkout Source") {
-			steps {
-				git changelog: false, credentialsId: env.GIT_REPO_CREDENTIALS, poll: false, url: env.GIT_REPO, branch: env.GIT_BRANCH
-			}
-		}
-
 		stage('Build Image') {
 			steps {
 				sh "make build"
