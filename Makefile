@@ -3,7 +3,7 @@ DOCKER_IMAGE = devlm/cdap
 ENVFILE ?= env.template
 
 all:
-	$(MAKE) build test clean
+	$(MAKE) clone build test clean
 
 ciPush: build test push clean
 
@@ -13,7 +13,7 @@ envfile:
 clone: envfile
 	git submodule update --remote --recursive --init
 
-build: clone
+build: envfile
 	docker build -t ${DOCKER_IMAGE}:$(DOCKER_IMAGE_TAG) .
 
 test:
