@@ -1,28 +1,26 @@
-DOCKER_IMAGE_VERSION ?= latest
-DOCKER_IMAGE = devlm/cdap:$(DOCKER_IMAGE_VERSION)
-COMPOSE_BUILD_MYIMAGE = DOCKER_IMAGE=$(DOCKER_IMAGE) docker-compose build --no-cache myimage
-COMPOSE_RUN_MYIMAGE = DOCKER_IMAGE=$(DOCKER_IMAGE) docker-compose run --rm myimage
-COMPOSE_RUN_MUSKETEERS = DOCKER_IMAGE=$(DOCKER_IMAGE) docker-compose run --rm musketeers
-COMPOSE_PULL = DOCKER_IMAGE=$(DOCKER_IMAGE) docker-compose pull
+DOCKER_IMAGE_TAG ?= latest
+DOCKER_IMAGE = devlm/cdap
 ENVFILE ?= env.template
 
 all:
-	$(MAKE) envfile clone build clean
+	$(MAKE) build test clean
 
-ciPush: envfile clone build push clean
+ciPush: build test push clean
 
 envfile:
 	cp -f $(ENVFILE) .env
 
-clone:
-	$(COMPOSE_RUN_MUSKETEERS) git submodule update --remote --recursive --init
+clone: envfile
+	git submodule update --remote --recursive --init
 
-build:
-	$(COMPOSE_BUILD_MYIMAGE)
+build: clone
+	docker build -t ${DOCKER_IMAGE}:$(DOCKER_IMAGE_TAG) .
+
+test:
+	echo "Tests go here..."
 
 push: envfile
-	$(COMPOSE_RUN_MUSKETEERS) docker push ${DOCKER_IMAGE}
+	docker push ${DOCKER_IMAGE}:$(DOCKER_IMAGE_TAG)
 
 clean:
-	docker-compose down --remove-orphans
 	rm -f .env
