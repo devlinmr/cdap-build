@@ -43,6 +43,7 @@ spec:
               --destination "${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}" \
               --no-push
         """
+        }
       }
     }
 
