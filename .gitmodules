@@ -1,6 +1,6 @@
 [submodule "cdap"]
 	path = cdap
-	url = https://github.com/devlinmr/cdap.git
+	url = git@github.com:devlinmr/cdap.git
 	branch = feature/amazon-emr-provider
 [submodule "app-artifacts/hydrator-plugins"]
 	path = app-artifacts/hydrator-plugins
