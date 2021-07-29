@@ -36,7 +36,8 @@ spec:
             /kaniko/executor \
               --context ${WORKSPACE} \
               --dockerfile ${WORKSPACE}/Dockerfile \
-              --destination "${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
+              --destination "${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}" \
+              --no-push
         """
         }
       }
