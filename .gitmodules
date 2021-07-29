@@ -1,7 +1,7 @@
 [submodule "cdap"]
 	path = cdap
 	url = ../cdap.git
-	branch = release/6.5
+	branch = feature/amazon-emr-provider
 [submodule "app-artifacts/hydrator-plugins"]
 	path = app-artifacts/hydrator-plugins
 	url = git@github.com:cdapio/hydrator-plugins.git
