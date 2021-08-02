@@ -24,6 +24,18 @@ spec:
     tty: true
     command:
     - cat
+    volumeMounts:
+      - name: docker-config
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: docker-config
+    projected:
+      sources:
+      - secret:
+          name: docker-creds
+          items:
+            - key: .dockerconfigjson
+              path: config.json
 """
     }
   }
