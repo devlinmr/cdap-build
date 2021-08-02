@@ -19,14 +19,14 @@ spec:
     tty: true
     command:
     - cat
+    volumeMounts:
+      - name: docker-config
+        mountPath: /kaniko/.docker
   - name: cdap-build
     image: gcr.io/cdapio/cdap-build:latest
     tty: true
     command:
     - cat
-    volumeMounts:
-      - name: docker-config
-        mountPath: /kaniko/.docker
   volumes:
   - name: docker-config
     projected:
