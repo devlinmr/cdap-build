@@ -22,11 +22,6 @@ spec:
     volumeMounts:
       - name: docker-config
         mountPath: /kaniko/.docker
-  - name: cdap-build
-    image: gcr.io/cdapio/cdap-build:latest
-    tty: true
-    command:
-    - cat
   volumes:
   - name: docker-config
     projected:
